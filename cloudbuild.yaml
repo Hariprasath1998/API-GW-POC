@@ -5,13 +5,11 @@ steps:
     # args : ["terraform", "-chdir=./cluster-deploy", "init"]
     name: 'hashicorp/terraform:1.0.0'
     entrypoint: 'sh'
-    args: 
-    - '-c'
-    - terraform -chdir=./app-deploy init
+    args : ["-c", "terraform", "-chdir=./cluster-deploy", "workspace", "select", "$($BRANCH_NAME)"]
 #   - id: 'Terraform Infrastructure set workspace'
 #     name: 'hashicorp/terraform:1.0.0'
 #     entrypoint: 'sh'
-#     args : ["-c", "terraform", "-chdir=./cluster-deploy", "workspace", "select", "$($BRANCH_NAME)"]
+    # args : ["-c", "terraform", "-chdir=./cluster-deploy", "workspace", "select", "$($BRANCH_NAME)"]
 #   - id: 'Terraform Infrastructure apply'
 #     name: 'hashicorp/terraform:1.0.0'
 #     entrypoint: 'sh'
@@ -38,5 +36,5 @@ steps:
 #     args : ["-c", "terraform", "-chdir=./app-deploy", 
 #             "apply", "--var-file=<(cat ./app-deploy/tfvars/$($BRANCH_NAME).tfvars", 
 #             "./$($BRANCH_NAME)_common.tfvars)", "--auto-approve"]
-# options:
-#   logging: CLOUD_LOGGING_ONLY
+options:
+  logging: CLOUD_LOGGING_ONLY
