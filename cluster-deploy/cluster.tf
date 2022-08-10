@@ -23,7 +23,7 @@ resource "google_container_cluster" "tyk" {
 
   private_cluster_config {
     enable_private_nodes    = true
-    enable_private_endpoint = true
+    enable_private_endpoint = false
     master_ipv4_cidr_block  = "10.0.0.0/28"
   }
 
