@@ -22,3 +22,5 @@ steps:
     args : ["terraform", "-chdir=./terraform-application", 
             "apply", "--var-file=<(cat ./terraform-application/tfvars/$BRANCH_NAME.tfvars", 
             "./common_tfvars/$BRANCH_NAME_common.tfvars)", "--auto-approve"]
+options:
+  logging: CLOUD_LOGGING_ONLY
