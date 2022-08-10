@@ -3,21 +3,21 @@ steps:
     name: 'hashicorp/terraform:1.0.0'
     entrypoint: 'sh'
     args: 
-    - '-c'
+    # - '-c'
     - terraform -chdir=./cluster-deploy init
 
   - id: 'Terraform Infrastructure set workspace'
     name: 'hashicorp/terraform:1.0.0'
     entrypoint: 'sh'
     args: 
-    - '-c'
+    # - '-c'
     - terraform -chdir=./cluster-deploy workspace select $BRANCH_NAME
 
   - id: 'Terraform Infrastructure apply'
     name: 'hashicorp/terraform:1.0.0'
     entrypoint: 'sh'
     args: 
-    - '-c'
+    # - '-c'
     - terraform -chdir=./cluster-deploy plan --var-file=<(cat ./cluster-deploy/tfvars/dev.tfvars ./dev_common.tfvars)
     # - terraform -chdir=./cluster-deploy apply --var-file=<(cat ./cluster-deploy/tfvars/${BRANCH_NAME}.tfvars ./${BRANCH_NAME}_common.tfvars) --auto-approve
     # - echo ${BRANCH_NAME}.tfvars
