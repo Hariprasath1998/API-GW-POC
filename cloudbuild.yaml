@@ -1,0 +1,24 @@
+steps:
+  - id: 'Terraform Infrastructure init'
+    name: 'hashicorp/terraform:1.0.0'
+    args : ["terraform", "-chdir=./terraform-infrastructure", "init"]
+  - id: 'Terraform Infrastructure set workspace'
+    name: 'hashicorp/terraform:1.0.0'
+    args : ["terraform", "-chdir=./terraform-infrastructure", "workspace", "select", "$BRANCH_NAME"]
+  - id: 'Terraform Infrastructure apply'
+    name: 'hashicorp/terraform:1.0.0'
+    args : ["terraform", "-chdir=./terraform-infrastructure",
+            "apply", "--var-file=<(cat ./terraform-infrastructure/tfvars/$BRANCH_NAME.tfvars",
+            "./common_tfvars/$BRANCH_NAME_common.tfvars)", "--auto-approve"]
+
+  - id: 'Terraform Application init'
+    name: 'hashicorp/terraform:1.0.0'
+    args : ["terraform", "-chdir=./terraform-application", "init"]
+  - id: 'Terraform Application set workspace'
+    name: 'hashicorp/terraform:1.0.0'
+    args : ["terraform", "-chdir=./terraform-application", "workspace", "select", "$BRANCH_NAME"]
+  - id: 'Terraform Application apply'
+    name: 'hashicorp/terraform:1.0.0'
+    args : ["terraform", "-chdir=./terraform-application", 
+            "apply", "--var-file=<(cat ./terraform-application/tfvars/$BRANCH_NAME.tfvars", 
+            "./common_tfvars/$BRANCH_NAME_common.tfvars)", "--auto-approve"]
