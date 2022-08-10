@@ -18,7 +18,7 @@ steps:
     entrypoint: 'sh'
     args: 
     - '-c'
-    - terraform -chdir=./cluster-deploy apply --var-file=<(cat ./cluster-deploy/tfvars/($BRANCH_NAME).tfvars ./($BRANCH_NAME)_common.tfvars) --auto-approve
+    - terraform -chdir=./cluster-deploy apply --var-file=<(cat ./cluster-deploy/tfvars/${$BRANCH_NAME}.tfvars ./${$BRANCH_NAME}_common.tfvars) --auto-approve
 
 #*********************#
   - id: 'Terraform Application init'
@@ -40,7 +40,7 @@ steps:
     entrypoint: 'sh'
     args: 
     - '-c'
-    - terraform -chdir=./app-deploy apply --var-file=<(cat ./app-deploy/tfvars/$($BRANCH_NAME).tfvars ./$($BRANCH_NAME)_common.tfvars) --auto-approve
+    - terraform -chdir=./app-deploy apply --var-file=<(cat ./app-deploy/tfvars/${$BRANCH_NAME}.tfvars ./${$BRANCH_NAME}_common.tfvars) --auto-approve
 
 options:
   logging: CLOUD_LOGGING_ONLY
