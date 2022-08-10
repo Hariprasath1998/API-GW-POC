@@ -2,7 +2,9 @@ steps:
   - id: 'Terraform Infrastructure init'
     name: 'hashicorp/terraform:1.0.0'
     entrypoint: 'sh'
-    args : ["-c" ,"terraform", "-chdir=./cluster-deploy", "init"]
+    args: 
+    - '-c'
+    - terraform -chdir=./cluster-deploy init
 #   - id: 'Terraform Infrastructure set workspace'
 #     name: 'hashicorp/terraform:1.0.0'
 #     entrypoint: 'sh'
