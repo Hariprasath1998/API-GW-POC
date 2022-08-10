@@ -15,9 +15,14 @@ steps:
             "./$($BRANCH_NAME)_common.tfvars)", "--auto-approve"]
 
   - id: 'Terraform Application init'
+    # name: 'hashicorp/terraform:1.0.0'
+    # entrypoint: 'sh'
+    # args : ["-c", "terraform", "-chdir=./app-deploy", "init"]
     name: 'hashicorp/terraform:1.0.0'
     entrypoint: 'sh'
-    args : ["-c", "terraform", "-chdir=./app-deploy", "init"]
+    args: 
+    - '-c'
+    - terraform init -chdir=./app-deploy
   - id: 'Terraform Application set workspace'
     name: 'hashicorp/terraform:1.0.0'
     entrypoint: 'sh'
