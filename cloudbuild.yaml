@@ -4,8 +4,8 @@ steps:
     entrypoint: 'sh'
     args: 
     - '-c'
-    - echo "${$BRANCH_NAME}"
-    - echo "$($BRANCH_NAME)"
+    - echo "${BRANCH_NAME}"
+    - echo "$(BRANCH_NAME)"
 #   - id: 'Terraform Infrastructure init'
 #     name: 'hashicorp/terraform:1.0.0'
 #     entrypoint: 'sh'
