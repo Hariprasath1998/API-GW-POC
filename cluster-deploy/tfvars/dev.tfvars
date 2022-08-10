@@ -22,9 +22,9 @@ node_locations     = ["us-west1-a", "us-west1-b"]
 # tyk_node_pool_name = "dev-api-gateway-tyk-node-pool"
 machine_type       = "e2-medium"
 
-region     = "us-west1"
-project_id = "melodic-splicer-357510"
+# region     = "us-west1"
+# project_id = "melodic-splicer-357510"
 
-project_environment = "dev"
-# project_name        = "api-gateway"
-project_name        = "hari-poc"
+# project_environment = "dev"
+# # project_name        = "api-gateway"
+# project_name        = "hari-poc"
