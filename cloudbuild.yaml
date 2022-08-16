@@ -28,14 +28,14 @@ steps:
   #   name: 'ubuntu'
   #   args: ['cat', 'cluster_name.txt']
   - id: 'sdasda'
-    name: 'ubuntu'
+    name: 'alpine:3.16.2'
     args: 
-    - _IP=$(curl -s https://ifconfig.me/ip)
+    - |
+      apk add curl
+      _IP=$(curl -s https://ifconfig.me/ip)
+      echo $_IP > /workspace/ip
+      cat /workspace/ip
 
-  - id: 'sda'
-    name: 'ubuntu'
-    args: 
-    - echo $_IP
 
     
 #*********************#
