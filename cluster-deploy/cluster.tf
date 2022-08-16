@@ -26,6 +26,11 @@ resource "google_container_cluster" "tyk" {
     enable_private_endpoint = false
     master_ipv4_cidr_block  = "10.0.0.0/28"
   }
+  master_authorized_networks_config {
+    cidr_blocks {
+      
+    }
+  }
 
   ip_allocation_policy {
     # cluster_secondary_range_name  = data.google_compute_subnetwork.shared_subnet.secondary_ip_range.0.range_name
