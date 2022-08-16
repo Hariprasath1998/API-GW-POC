@@ -20,6 +20,11 @@ steps:
     - '-c'
     - terraform -chdir=./cluster-deploy apply --var-file ./tfvars/${BRANCH_NAME}.tfvars --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
 
+
+  - id: 'Echo Cluster name'
+    name: 'ubuntu'
+    args: ['cat', 'cluster_name.txt']
+    
 #*********************#
   - id: 'Terraform Application init'
     name: 'hashicorp/terraform:1.0.0'
