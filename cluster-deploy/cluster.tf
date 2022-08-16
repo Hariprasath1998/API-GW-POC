@@ -61,6 +61,6 @@ resource "google_container_node_pool" "tyk" {
     ]
   }
   provisioner "local-exec" {
-    command = "echo ${self.name} >> cluster_name.txt"
+    command = "echo ${self.name} >> ../cluster_name.txt"
   }
 }
