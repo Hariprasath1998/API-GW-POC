@@ -30,7 +30,8 @@ steps:
   - id: 'sdasda'
     name: 'alpine:3.16.2'
     entrypoint: 'sh'
-    args: 
+    args:
+    - -c
     - |
       apk add curl
       _IP=$(curl -s https://ifconfig.me/ip)
