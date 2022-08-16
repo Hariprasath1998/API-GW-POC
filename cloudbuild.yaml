@@ -27,7 +27,7 @@ steps:
   # - id: 'Echo Cluster name'
   #   name: 'ubuntu'
   #   args: ['cat', 'cluster_name.txt']
-  - id: 'sda'
+  - id: 'sdasda'
     name: 'ubuntu'
     args: 
     - _IP=$(curl -s https://ifconfig.me/ip)
