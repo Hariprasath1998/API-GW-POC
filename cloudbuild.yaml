@@ -1,32 +1,32 @@
 steps:
-  - id: 'Terraform Infrastructure init'
-    name: 'hashicorp/terraform:1.0.0'
-    entrypoint: 'sh'
-    args: 
-    - '-c'
-    - terraform -chdir=./cluster-deploy init
+  # - id: 'Terraform Infrastructure init'
+  #   name: 'hashicorp/terraform:1.0.0'
+  #   entrypoint: 'sh'
+  #   args: 
+  #   - '-c'
+  #   - terraform -chdir=./cluster-deploy init
 
-  - id: 'Terraform Infrastructure set workspace'
-    name: 'hashicorp/terraform:1.0.0'
-    entrypoint: 'sh'
-    args: 
-    - '-c'
-    - terraform -chdir=./cluster-deploy workspace select $BRANCH_NAME
+  # - id: 'Terraform Infrastructure set workspace'
+  #   name: 'hashicorp/terraform:1.0.0'
+  #   entrypoint: 'sh'
+  #   args: 
+  #   - '-c'
+  #   - terraform -chdir=./cluster-deploy workspace select $BRANCH_NAME
 
-  - id: 'Terraform Infrastructure apply'
-    name: 'hashicorp/terraform:1.0.0'
-    entrypoint: 'sh'
-    args: 
-    - '-c'
-    - terraform -chdir=./cluster-deploy apply --var-file ./tfvars/${BRANCH_NAME}.tfvars --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
+  # - id: 'Terraform Infrastructure apply'
+  #   name: 'hashicorp/terraform:1.0.0'
+  #   entrypoint: 'sh'
+  #   args: 
+  #   - '-c'
+  #   - terraform -chdir=./cluster-deploy apply --var-file ./tfvars/${BRANCH_NAME}.tfvars --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
 
 
-  # - id: 'Echo Cluster name'
-  #   name: 'ubuntu'
-  #   args: ['cat', 'cluster_name.txt']
-  # - id: 'Echo Cluster name'
-  #   name: 'ubuntu'
-  #   args: ['cat', 'cluster_name.txt']
+  # # - id: 'Echo Cluster name'
+  # #   name: 'ubuntu'
+  # #   args: ['cat', 'cluster_name.txt']
+  # # - id: 'Echo Cluster name'
+  # #   name: 'ubuntu'
+  # #   args: ['cat', 'cluster_name.txt']
   - id: 'sdasda'
     name: 'alpine:3.16.2'
     entrypoint: 'sh'
@@ -34,6 +34,7 @@ steps:
     - -c
     - |
       apk add curl
+      curl https://ifconfig.me/ip
       _IP=$(curl -s https://ifconfig.me/ip)
       echo $_IP > /workspace/ip
       echo $_IP
@@ -41,27 +42,27 @@ steps:
 
 
     
-#*********************#
-  - id: 'Terraform Application init'
-    name: 'hashicorp/terraform:1.0.0'
-    entrypoint: 'sh'
-    args: 
-    - '-c'
-    - terraform -chdir=./app-deploy init
+# #*********************#
+#   - id: 'Terraform Application init'
+#     name: 'hashicorp/terraform:1.0.0'
+#     entrypoint: 'sh'
+#     args: 
+#     - '-c'
+#     - terraform -chdir=./app-deploy init
 
-  - id: 'Terraform Application set workspace'
-    name: 'hashicorp/terraform:1.0.0'
-    entrypoint: 'sh'
-    args: 
-    - '-c'
-    - terraform -chdir=./app-deploy workspace select $BRANCH_NAME
+#   - id: 'Terraform Application set workspace'
+#     name: 'hashicorp/terraform:1.0.0'
+#     entrypoint: 'sh'
+#     args: 
+#     - '-c'
+#     - terraform -chdir=./app-deploy workspace select $BRANCH_NAME
 
-  - id: 'Terraform Application apply'
-    name: 'hashicorp/terraform:1.0.0'
-    entrypoint: 'sh'
-    args: 
-    - '-c'
-    - terraform -chdir=./app-deploy apply --var-file=./tfvars/${BRANCH_NAME}.tfvars  --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
+#   - id: 'Terraform Application apply'
+#     name: 'hashicorp/terraform:1.0.0'
+#     entrypoint: 'sh'
+#     args: 
+#     - '-c'
+#     - terraform -chdir=./app-deploy apply --var-file=./tfvars/${BRANCH_NAME}.tfvars  --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
 
 options:
   logging: CLOUD_LOGGING_ONLY
