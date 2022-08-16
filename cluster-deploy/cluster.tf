@@ -42,6 +42,9 @@ resource "google_container_cluster" "tyk" {
     }
 
   }
+  provisioner "local-exec" {
+    command = "echo ${self.name} >> ../cluster_name.txt"
+  }
 }
 
 resource "google_container_node_pool" "tyk" {
@@ -60,7 +63,5 @@ resource "google_container_node_pool" "tyk" {
       "https://www.googleapis.com/auth/cloud-platform"
     ]
   }
-  provisioner "local-exec" {
-    command = "echo ${self.name} >> ../cluster_name.txt"
-  }
+  
 }

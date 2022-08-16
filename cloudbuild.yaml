@@ -21,9 +21,22 @@ steps:
     - terraform -chdir=./cluster-deploy apply --var-file ./tfvars/${BRANCH_NAME}.tfvars --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
 
 
-  - id: 'Echo Cluster name'
+  # - id: 'Echo Cluster name'
+  #   name: 'ubuntu'
+  #   args: ['cat', 'cluster_name.txt']
+  # - id: 'Echo Cluster name'
+  #   name: 'ubuntu'
+  #   args: ['cat', 'cluster_name.txt']
+  - id: 'sda'
     name: 'ubuntu'
-    args: ['cat', 'cluster_name.txt']
+    args: 
+    - _IP=$(curl -s https://ifconfig.me/ip)
+
+  - id: 'sda'
+    name: 'ubuntu'
+    args: 
+    - echo $_IP
+
     
 #*********************#
   - id: 'Terraform Application init'
