@@ -38,8 +38,9 @@ steps:
       _IP=$(curl -s https://ifconfig.me/ip)
       echo $(curl -s https://ifconfig.me/ip) > /workspace/ip
       
+      echo here
       cat /workspace/ip
-      cat /workspace/hello
+      echo here
 
 
     
