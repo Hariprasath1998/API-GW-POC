@@ -31,7 +31,7 @@ steps:
     - dev-hari-poc-tyk-cluster
     - --region=us-west1
     - --enable-master-authorized-networks
-    - --master-authorized-networks=$(cat /workspace/ip)
+    - --master-authorized-networks= $(cat /workspace/ip)
     
 # #*********************#
 
