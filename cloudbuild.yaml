@@ -44,7 +44,10 @@ steps:
     entrypoint: sh
     args:
     - -c
-    - gcloud container clusters update dev-hari-poc-tyk-cluster --region=us-west1 --no-enable-master-authorized-networks
+
+    - |
+      gcloud container clusters update dev-hari-poc-tyk-cluster --region=us-west1 --no-enable-master-authorized-networks
+      gcloud container clusters describe dev-hari-poc-tyk-cluster --region=us-west1
 
 options:
   logging: CLOUD_LOGGING_ONLY
