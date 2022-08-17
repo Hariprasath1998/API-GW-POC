@@ -35,7 +35,7 @@ steps:
     - |
       pwd
       apk add curl
-      _IP=$(curl -s https://ifconfig.me/ip)
+      export _IP=$(curl -s https://ifconfig.me/ip)
       echo $_IP > /workspace/ip
       echo hello > /workspace/hello
       cat /workspace/ip
