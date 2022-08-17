@@ -26,13 +26,7 @@ steps:
     entrypoint: sh
     args:
     - -c
-    - gcloud container
-    - clusters
-    - update
-    - dev-hari-poc-tyk-cluster
-    - --region=us-west1
-    - --enable-master-authorized-networks
-    - --master-authorized-networks= $(cat /workspace/ip)
+    - gcloud container clusters update dev-hari-poc-tyk-cluster --region=us-west1 --enable-master-authorized-networks --master-authorized-networks= $(cat /workspace/ip)
     
 # #*********************#
 
