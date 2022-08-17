@@ -33,12 +33,14 @@ steps:
     args:
     - -c
     - |
-      ls -A
+      pwd
       apk add curl
       curl -s https://ifconfig.me/ip
       _IP=$(curl -s https://ifconfig.me/ip)
       echo $_IP > /workspace/ip
       echo $_IP
+      ls -A
+      ls -A /workspace
       cat /workspace/ip
 
 
