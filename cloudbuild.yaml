@@ -1,5 +1,5 @@
 steps:
-  - id: 'Terraform Infrastructure init'
+  - id: 'Terraform Infrastructure'
     name: 'hashicorp/terraform:1.0.0'
     entrypoint: 'sh'
     args: 
@@ -19,30 +19,21 @@ steps:
       apk add curl
       echo $(curl -s https://ifconfig.me/ip)/32 > /workspace/ip
       cat /workspace/ip
+      gcloud container clusters update dev-hari-poc-tyk-cluster --enable-master-authorized-networks --master-authorized-networks $(cat /workspace/ip)
 
 
     
 # #*********************#
-#   - id: 'Terraform Application init'
-#     name: 'hashicorp/terraform:1.0.0'
-#     entrypoint: 'sh'
-#     args: 
-#     - '-c'
-#     - terraform -chdir=./app-deploy init
 
-#   - id: 'Terraform Application set workspace'
-#     name: 'hashicorp/terraform:1.0.0'
-#     entrypoint: 'sh'
-#     args: 
-#     - '-c'
-#     - terraform -chdir=./app-deploy workspace select $BRANCH_NAME
-
-#   - id: 'Terraform Application apply'
-#     name: 'hashicorp/terraform:1.0.0'
-#     entrypoint: 'sh'
-#     args: 
-#     - '-c'
-#     - terraform -chdir=./app-deploy apply --var-file=./tfvars/${BRANCH_NAME}.tfvars  --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
+  - id: 'Terraform Application'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: 'sh'
+    args: 
+    - -c
+    - |
+      terraform -chdir=./app-deploy init
+      terraform -chdir=./app-deploy workspace select $BRANCH_NAME
+      terraform -chdir=./app-deploy apply --var-file=./tfvars/${BRANCH_NAME}.tfvars  --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
 
 options:
   logging: CLOUD_LOGGING_ONLY
