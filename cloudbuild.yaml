@@ -9,28 +9,7 @@ steps:
       terraform -chdir=./cluster-deploy workspace select $BRANCH_NAME
       terraform -chdir=./cluster-deploy apply --var-file ./tfvars/${BRANCH_NAME}.tfvars --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
 
-  # - id: 'Terraform Infrastructure set workspace'
-  #   name: 'hashicorp/terraform:1.0.0'
-  #   entrypoint: 'sh'
-  #   args: 
-  #   - '-c'
-  #   - terraform -chdir=./cluster-deploy workspace select $BRANCH_NAME
-
-  # - id: 'Terraform Infrastructure apply'
-  #   name: 'hashicorp/terraform:1.0.0'
-  #   entrypoint: 'sh'
-  #   args: 
-  #   - '-c'
-  #   - terraform -chdir=./cluster-deploy apply --var-file ./tfvars/${BRANCH_NAME}.tfvars --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
-
-
-  # # - id: 'Echo Cluster name'
-  # #   name: 'ubuntu'
-  # #   args: ['cat', 'cluster_name.txt']
-  # # - id: 'Echo Cluster name'
-  # #   name: 'ubuntu'
-  # #   args: ['cat', 'cluster_name.txt']
-  - id: 'sdasda'
+  - id: 'IP Whitelist'
     name: 'alpine:3.16.2'
     entrypoint: 'sh'
     args:
@@ -38,7 +17,7 @@ steps:
     - |
       pwd
       apk add curl
-      echo $(curl -s https://ifconfig.me/ip) > /workspace/ip
+      echo $(curl -s https://ifconfig.me/ip)/32 > /workspace/ip
       cat /workspace/ip
 
 
