@@ -27,7 +27,7 @@ steps:
     args:
     - container
     - clusters
-    - ls
+    - list
     # - update
     # - dev-hari-poc-tyk-cluster
     # - --enable-master-authorized-networks
