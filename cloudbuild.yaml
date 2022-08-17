@@ -40,8 +40,6 @@ steps:
       echo hello > /workspace/hello
       cat /workspace/ip
       cat /workspace/hello
-      ls -A /workspace
-      cat /workspace/ip
 
 
     
