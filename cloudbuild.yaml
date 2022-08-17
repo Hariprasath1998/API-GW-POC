@@ -23,10 +23,8 @@ steps:
 
   - id: 'IP Whitelist'
     name: gcr.io/cloud-builders/gcloud
-    entrypoint: 'sh'
+    entrypoint: gcloud
     args:
-    - -c
-    - gcloud
     - container
     - clusters
     - update
