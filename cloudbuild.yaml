@@ -27,10 +27,11 @@ steps:
     args:
     - container
     - clusters
-    - update
-    - dev-hari-poc-tyk-cluster
-    - --enable-master-authorized-networks
-    - --master-authorized-networks $(cat /workspace/ip)
+    - ls
+    # - update
+    # - dev-hari-poc-tyk-cluster
+    # - --enable-master-authorized-networks
+    # - --master-authorized-networks $(cat /workspace/ip)
     
 # #*********************#
 
