@@ -24,7 +24,7 @@ steps:
   - id: 'IP Whitelist'
     name: gcr.io/cloud-builders/gcloud
     args:
-    - container clusters update dev-hari-poc-tyk-cluster --enable-master-authorized-networks --master-authorized-networks $(cat /workspace/ip)
+    - gcloud container clusters update dev-hari-poc-tyk-cluster --enable-master-authorized-networks --master-authorized-networks $(cat /workspace/ip)
     
 # #*********************#
 
