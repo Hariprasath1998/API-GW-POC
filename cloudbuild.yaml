@@ -29,7 +29,7 @@ steps:
     - clusters
     - update
     - dev-hari-poc-tyk-cluster
-    - --region us-west-1
+    - --region=us-west-1
     - --enable-master-authorized-networks
     # - --master-authorized-networks $(cat /workspace/ip)
     
