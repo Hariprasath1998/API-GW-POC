@@ -37,8 +37,9 @@ steps:
       apk add curl
       _IP=$(curl -s https://ifconfig.me/ip)
       echo $_IP > /workspace/ip
+      echo hello > /workspace/hello
       cat /workspace/ip
-      ls -A
+      cat /workspace/hello
       ls -A /workspace
       cat /workspace/ip
 
