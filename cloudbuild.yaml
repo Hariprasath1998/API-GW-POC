@@ -9,7 +9,7 @@ steps:
       terraform -chdir=./cluster-deploy workspace select $BRANCH_NAME
       terraform -chdir=./cluster-deploy apply --var-file ./tfvars/${BRANCH_NAME}.tfvars --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
 
-  - id: 'IP Whitelist'
+  - id: 'Fetch IP'
     name: 'alpine:3.16.2'
     entrypoint: 'sh'
     args:
@@ -19,9 +19,13 @@ steps:
       apk add curl
       echo $(curl -s https://ifconfig.me/ip)/32 > /workspace/ip
       cat /workspace/ip
-      gcloud container clusters update dev-hari-poc-tyk-cluster --enable-master-authorized-networks --master-authorized-networks $(cat /workspace/ip)
+      
 
-
+  - id: 'IP Whitelist'
+    name: gcr.io/cloud-builders/gcloud
+    args:
+    - -c
+    - container clusters update dev-hari-poc-tyk-cluster --enable-master-authorized-networks --master-authorized-networks $(cat /workspace/ip)
     
 # #*********************#
 
