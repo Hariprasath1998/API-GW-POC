@@ -1,13 +1,13 @@
 steps:
-  # - id: 'Terraform Infrastructure'
-  #   name: 'hashicorp/terraform:1.0.0'
-  #   entrypoint: 'sh'
-  #   args: 
-  #   - -c
-  #   - |
-  #     terraform -chdir=./cluster-deploy init
-  #     terraform -chdir=./cluster-deploy workspace select $BRANCH_NAME
-  #     terraform -chdir=./cluster-deploy apply --var-file ./tfvars/${BRANCH_NAME}.tfvars --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
+  - id: 'Terraform Infrastructure'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: 'sh'
+    args: 
+    - -c
+    - |
+      terraform -chdir=./cluster-deploy init
+      terraform -chdir=./cluster-deploy workspace select $BRANCH_NAME
+      terraform -chdir=./cluster-deploy apply --var-file ./tfvars/${BRANCH_NAME}.tfvars --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
 
   - id: 'Fetch IP'
     name: 'alpine:3.16.2'
@@ -31,15 +31,15 @@ steps:
     
 # #*********************#
 
-  # - id: 'Terraform Application'
-  #   name: 'hashicorp/terraform:1.0.0'
-  #   entrypoint: 'sh'
-  #   args: 
-  #   - -c
-  #   - |
-  #     terraform -chdir=./app-deploy init
-  #     terraform -chdir=./app-deploy workspace select $BRANCH_NAME
-  #     terraform -chdir=./app-deploy apply --var-file=./tfvars/${BRANCH_NAME}.tfvars  --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
+  - id: 'Terraform Application'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: 'sh'
+    args: 
+    - -c
+    - |
+      terraform -chdir=./app-deploy init
+      terraform -chdir=./app-deploy workspace select $BRANCH_NAME
+      terraform -chdir=./app-deploy apply --var-file=./tfvars/${BRANCH_NAME}.tfvars  --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
 
   - id: 'Remove Master authorized networks'
     name: gcr.io/cloud-builders/gcloud
@@ -48,7 +48,7 @@ steps:
     - -c
 
     - |
-      gcloud container clusters update dev-hari-poc-tyk-cluster --region=us-west1 --no-enable-master-authorized-networks
+      gcloud container clusters update dev-hari-poc-tyk-cluster --region=us-west1 --enable-master-authorized-networks
       gcloud container clusters describe dev-hari-poc-tyk-cluster --region=us-west1
 
 options:
