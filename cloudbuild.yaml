@@ -26,8 +26,7 @@ steps:
     entrypoint: sh
     args:
     - -c
-    - gcloud
-    - container
+    - gcloud container
     - clusters
     - update
     - dev-hari-poc-tyk-cluster
