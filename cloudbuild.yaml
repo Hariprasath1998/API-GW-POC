@@ -3,8 +3,11 @@ steps:
   #   name: 'hashicorp/terraform:1.0.0'
   #   entrypoint: 'sh'
   #   args: 
-  #   - '-c'
-  #   - terraform -chdir=./cluster-deploy init
+    - -c
+    - |
+      terraform -chdir=./cluster-deploy init
+      terraform -chdir=./cluster-deploy workspace select $BRANCH_NAME
+      terraform -chdir=./cluster-deploy apply --var-file ./tfvars/${BRANCH_NAME}.tfvars --var-file ../${BRANCH_NAME}_common.tfvars --auto-approve
 
   # - id: 'Terraform Infrastructure set workspace'
   #   name: 'hashicorp/terraform:1.0.0'
@@ -35,12 +38,8 @@ steps:
     - |
       pwd
       apk add curl
-      _IP=$(curl -s https://ifconfig.me/ip)
       echo $(curl -s https://ifconfig.me/ip) > /workspace/ip
-      
-      echo here
       cat /workspace/ip
-      echo here
 
 
     
